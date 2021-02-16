@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Submit A Deep Thought</h1>
+<!--<form method="post">
+    {% csrf_token %}
+    <p><label>Title: <input type="text"></label></p>
+    <p><label>Thought: <textarea class="input" cols="50" rows="10"></textarea></label></p>
+    <input type="submit" value="Submit"/>
+</form>-->
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
