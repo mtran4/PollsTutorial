@@ -4,9 +4,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.views.generic.edit import CreateView
+from polls.models import Thoughts
 from django.template import loader
 
-from .models import Choice, Question
+from .models import Choice, Question, Thoughts
 
 
 # Create your views here.
@@ -77,8 +79,16 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-# def vote(request, question_id):
-#     return HttpResponse("You're voting on question %s." % question_id)
+class ThoughtsView(generic.ListView):
+    model = Thoughts
+    template_name = 'polls/thoughts.html'
+    context_object_name = 'thoughts_list'
+    def get_queryset(self):
+        return Thoughts.objects.all()
+
+class ThoughtCreate(CreateView):
+    model = Thoughts
+    fields = ['title', 'thought_text']
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -97,7 +107,3 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-
-
-
-

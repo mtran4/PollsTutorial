@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 class Question(models.Model):
@@ -22,3 +23,11 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
+
+class Thoughts(models.Model):
+    title = models.CharField(max_length=200)
+    thought_text = models.TextField('deep thought')
+    def __str__(self):
+        return self.thought_text
+    def get_absolute_url(self):
+        return reverse('polls:thoughts_list')
