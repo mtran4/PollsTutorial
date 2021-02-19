@@ -2,4 +2,4 @@ Django
 gunicorn
 django-heroku
 bootstrap4
-crispy_forms
+django-crispy-forms
