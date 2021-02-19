@@ -1,3 +1,4 @@
+{% extends 'polls/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -8,16 +9,22 @@
     <title>Title</title>
 </head>
 <body>
+{% block content %}
+<h1>Click A Question to Vote</h1>
 {% if latest_question_list %}
 <ul>
+
     {% for question in latest_question_list %}
     <!--<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
+    <p>
     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    </p>
     {% endfor %}
+
 </ul>
 {% else %}
 <p>No polls are available.</p>
 {% endif %}
-
+{% endblock %}
 </body>
 </html>
